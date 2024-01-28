@@ -1,4 +1,6 @@
-import type { MetaFunction } from '@remix-run/node'
+import type { LoaderFunctionArgs, MetaFunction } from '@remix-run/node'
+import { useLoaderData } from '@remix-run/react'
+import { selectMessage } from '~/services/duckdb.server'
 
 export const meta: MetaFunction = () => {
   return [
@@ -7,10 +9,18 @@ export const meta: MetaFunction = () => {
   ]
 }
 
+export const loader = async (args: LoaderFunctionArgs) => {
+  const message = await selectMessage()
+  return { message }
+}
+
 export default function Index() {
+  const { message } = useLoaderData<typeof loader>()
+
   return (
     <div style={{ fontFamily: 'system-ui, sans-serif', lineHeight: '1.8' }}>
       <h1>Welcome to Remix</h1>
+      <div>{message}</div>
       <ul>
         <li>
           <a
