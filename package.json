@@ -23,6 +23,7 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.5.3",
+		"@mapbox/node-pre-gyp": "^1.0.11",
 		"@remix-run/dev": "^2.5.1",
 		"@types/react": "^18.2.20",
 		"@types/react-dom": "^18.2.7",
@@ -33,5 +34,10 @@
 	},
 	"engines": {
 		"node": ">=18.0.0"
+	},
+	"pnpm": {
+		"patchedDependencies": {
+			"@mapbox/node-pre-gyp@1.0.11": "patches/@mapbox__node-pre-gyp@1.0.11.patch"
+		}
 	}
 }
